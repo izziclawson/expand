@@ -1,1 +1,116 @@
-code to be added here
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Expand</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg: #4b1f2a;          /* burgundy */
+  --frame: #f5efe9;      /* soft off-white */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: system-ui, sans-serif;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 11 / 14;
+  background: var(--frame);
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(0,0,0,.35);
+  overflow: hidden;
+  position: relative;
+}
+
+.slides {
+  display: flex;
+  width: 400%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--frame);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.controls {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="carousel">
+  <div class="slides" id="slides">
+    <div class="slide"><img src="1.png"></div>
+    <div class="slide"><img src="2.png"></div>
+    <div class="slide"><img src="3.png"></div>
+    <div class="slide"><img src="4.png"></div>
+  </div>
+
+  <div class="controls">
+    <div class="dot active" onclick="go(0)"></div>
+    <div class="dot" onclick="go(1)"></div>
+    <div class="dot" onclick="go(2)"></div>
+    <div class="dot" onclick="go(3)"></div>
+  </div>
+</div>
+
+<script>
+let index = 0;
+const slides = document.getElementById("slides");
+const dots = document.querySelectorAll(".dot");
+
+function go(i) {
+  index = i;
+  slides.style.transform = `translateX(-${i * 100}%)`;
+  dots.forEach(d => d.classList.remove("active"));
+  dots[i].classList.add("active");
+}
+</script>
+
+</body>
+</html>
